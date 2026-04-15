@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-gray-900 text-white;
+}
+
+input, select, textarea {
+  @apply bg-gray-800 border border-gray-700 text-white rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+@media print {
+  @page {
+    size: landscape; /* Fuerza horizontal */
+    margin: 0;       /* Quita márgenes automáticos */
+  }
+  
+  body {
+    -webkit-print-color-adjust: exact; /* Asegura que se impriman los colores de fondo */
+    print-color-adjust: exact;
+  }
+}
+
+/* === ESTILOS PARA LA BARRA DE SCROLL (Dark Mode) === */
+
+/* Aplica a todo el sitio */
+::-webkit-scrollbar {
+  width: 8px; /* Ancho delgado */
+  height: 8px;
+}
+
+/* El fondo de la barra (el riel) */
+::-webkit-scrollbar-track {
+  background: #13141a; /* Mismo color que tu fondo */
+}
+
+/* La parte que se mueve (el pulgar) */
+::-webkit-scrollbar-thumb {
+  background: #374151; /* Gris oscuro */
+  border-radius: 4px;  /* Redondeado */
+  border: 2px solid #13141a; /* Borde para efecto flotante */
+}
+
+/* Al pasar el mouse */
+::-webkit-scrollbar-thumb:hover {
+  background: #4B5563; /* Gris un poco más claro */
+}

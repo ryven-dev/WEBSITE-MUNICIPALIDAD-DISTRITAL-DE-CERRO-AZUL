@@ -1,0 +1,11 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # Le dice al servidor que la base de tu app es la carpeta /sgc/
+  RewriteBase /sgc/
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-l
+  # Si no encuentra el archivo, reenvía la petición a /sgc/index.html
+  RewriteRule . /sgc/index.html [L]
+</IfModule>
