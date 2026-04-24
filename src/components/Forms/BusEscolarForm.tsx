@@ -40,7 +40,7 @@ const BusEscolarForm = ({ isOpen, onClose, onSuccess, dataToEdit }: BusEscolarFo
         setLoading(true);
 
         try {
-            // PROCESAMIENTO FINAL EN MAYÚSCULAS
+            
             const payload = {
                 nombre_alumno: formData.nombre_alumno?.trim().toUpperCase(),
                 dni_alumno: formData.dni_alumno?.trim(),
@@ -59,7 +59,7 @@ const BusEscolarForm = ({ isOpen, onClose, onSuccess, dataToEdit }: BusEscolarFo
                 if (error) throw error;
                 toast.success('REGISTRO ACTUALIZADO');
             } else {
-                // GENERACIÓN ATÓMICA DEL CÓDIGO
+                
                 const { data: nextCode, error: rpcError } = await supabase.rpc('generar_siguiente_codigo_bus');
                 if (rpcError) throw rpcError;
 

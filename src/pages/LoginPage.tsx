@@ -32,7 +32,7 @@ const LoginPage = () => {
     setLoading(true);
 
     try {
-      // Autocompletar dominio si falta
+     
       const emailFinal = email.includes('@') 
         ? email 
         : `${email}@sgc.com`;
@@ -47,7 +47,7 @@ const LoginPage = () => {
       if (error) throw error;
 
       if (data.session) {
-        // 2. GUARDAR USUARIO EN LOCALSTORAGE (Solo la parte visual, sin dominio si es sgc)
+        
         const userToSave = emailFinal.endsWith('@sgc.com') ? emailFinal.split('@')[0] : emailFinal;
         localStorage.setItem('lastUser', userToSave);
 

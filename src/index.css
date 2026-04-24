@@ -12,12 +12,12 @@ input, select, textarea {
 
 @media print {
   @page {
-    size: landscape; /* Fuerza horizontal */
-    margin: 0;       /* Quita márgenes automáticos */
+    size: landscape; 
+    margin: 0;       
   }
   
   body {
-    -webkit-print-color-adjust: exact; /* Asegura que se impriman los colores de fondo */
+    -webkit-print-color-adjust: exact; 
     print-color-adjust: exact;
   }
 }
@@ -26,23 +26,23 @@ input, select, textarea {
 
 /* Aplica a todo el sitio */
 ::-webkit-scrollbar {
-  width: 8px; /* Ancho delgado */
+  width: 8px; 
   height: 8px;
 }
 
 /* El fondo de la barra (el riel) */
 ::-webkit-scrollbar-track {
-  background: #13141a; /* Mismo color que tu fondo */
+  background: #13141a; 
 }
 
 /* La parte que se mueve (el pulgar) */
 ::-webkit-scrollbar-thumb {
-  background: #374151; /* Gris oscuro */
-  border-radius: 4px;  /* Redondeado */
-  border: 2px solid #13141a; /* Borde para efecto flotante */
+  background: #374151; 
+  border-radius: 4px;  
+  border: 2px solid #13141a; 
 }
 
 /* Al pasar el mouse */
 ::-webkit-scrollbar-thumb:hover {
-  background: #4B5563; /* Gris un poco más claro */
+  background: #4B5563; 
 }

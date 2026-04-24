@@ -36,7 +36,7 @@ const DashboardSocial = () => {
         busMunicipal: busRes.count || 0,
         biblioteca: bibRes.count || 0,
         vacaciones: vacRes.count || 0,
-        vasoLeche: 0, // Ejemplo estático mantenido
+        vasoLeche: 0, 
       }));
     } catch (error) {
       console.error(error);

@@ -222,7 +222,7 @@ const Dashboard = () => {
                             </span>
                         </div>
 
-                        {/* 3. FECHA (Fija a la derecha) */}
+                        {/* 3. FECHA */}
                         <div className="shrink-0 text-right">
                             <span className="text-[10px] text-gray-500 font-mono block">
                                 {item.fecha}

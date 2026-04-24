@@ -9,7 +9,7 @@ import { BrowserRouter } from 'react-router-dom'
 import Modal from 'react-modal'; 
 import { AuthProvider } from './context/AuthContext'; 
 
-// Vincular el modal al elemento raíz de tu app
+
 Modal.setAppElement('#root'); 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

@@ -10,7 +10,7 @@ type UserArea = 'ADMIN' | 'COMERCIALIZACION' | 'FISCALIZACION' | 'GERENCIA' | 'D
 interface AuthContextType {
   session: Session | null;
   userRole: UserRole;
-  userArea: UserArea; // <--- IMPORTANTE: Este campo debe existir
+  userArea: UserArea; // 
   loading: boolean;
   signOut: () => Promise<void>;
 }
@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const fetchUserProfile = async (userId: string) => {
     try {
-      // AQUÍ ESTÁ LA CLAVE: Pedimos 'role' Y TAMBIÉN 'area'
+     
       const { data, error } = await supabase
         .from('profiles')
         .select('role, area') 
@@ -56,7 +56,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
       if (error || !data) {
         setUserRole('visor');
-        setUserArea('COMERCIALIZACION'); // Default seguro
+        setUserArea('COMERCIALIZACION'); 
       } else {
         setUserRole(data.role as UserRole);
         setUserArea(data.area as UserArea);

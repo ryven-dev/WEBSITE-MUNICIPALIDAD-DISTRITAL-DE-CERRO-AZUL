@@ -5,7 +5,7 @@ import type { Comercio } from '../types';
 import { 
   RiAddLine, RiPencilLine, RiDeleteBinLine, RiQrCodeLine, RiPrinterLine, 
   RiSearchLine, RiFileExcel2Line, RiUserVoiceLine, RiFilter3Line,
-  RiCloseLine, RiPieChart2Line, RiLockLine, // <--- Se usa abajo en los botones
+  RiCloseLine, RiPieChart2Line, RiLockLine, 
   RiArrowLeftSLine, RiArrowRightSLine,
   RiErrorWarningLine, RiCalendarEventLine
 } from 'react-icons/ri';
@@ -22,7 +22,7 @@ import CarnetImprimible from '../components/PDF/CarnetImprimible';
 
 const ComerciosPage = () => {
   const { userRole, session } = useAuth();
-  const { anio } = useParams(); // Capturamos el año de la URL (2025 o 2026)
+  const { anio } = useParams(); 
   const [searchParams, setSearchParams] = useSearchParams(); 
 
   const [comercios, setComercios] = useState<Comercio[]>([]);
@@ -72,7 +72,7 @@ const ComerciosPage = () => {
     const { data, error } = await supabase
       .from('comercios_ambulatorios')
       .select('*')
-      .eq('anio', anio) // Filtramos por el año de la URL
+      .eq('anio', anio) 
       .order('numero_autorizacion', { ascending: true });
 
     if (error) setError(error.message); else setComercios(data);
@@ -176,15 +176,14 @@ const ComerciosPage = () => {
     <div className="p-4">
       <div style={{ display: 'none' }}>{printComercio && <CarnetImprimible ref={printRef} comercio={printComercio} />}</div>
       
-      {/* Pasamos el año actual (de la URL) al formulario para que guarde correctamente el 2026 */}
-      {/* Si ComercioForm no acepta la prop aun, no te preocupes, lo importante es filtrar visualmente */}
+      
      <ComercioForm 
   isOpen={isFormModalOpen} 
   onClose={handleCloseFormModal} 
   onFormSubmit={fetchComercios} 
   comercioData={comercioToEdit}
   
-  // 2. LE AGREGAS ESTA LÍNEA:
+  
   currentYearContext={anio || '2025'} 
 />
       

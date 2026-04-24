@@ -9,10 +9,7 @@ import type { Libro } from '../../types';
 import LibroForm from '../../components/Forms/LibroForm';
 import toast from 'react-hot-toast';
 
-/**
- * Diccionario de descripciones para las clasificaciones 
- * Se usa para mostrar información extra debajo de la categoría en la tabla
- */
+
 const CLASIFICACIONES_INFO: Record<string, string> = {
     "Generalidades": "Computación, enciclopedias, bibliografía",
     "Filosofía y Psicología": "Ética, lógica, filosofía",

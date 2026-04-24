@@ -45,10 +45,10 @@ const Header = ({ onMenuClick }: HeaderProps) => {
 
   // --- LÓGICA DE ETIQUETA GENERALIZADA ---
   const getUserLabel = () => {
-    // Solo la cuenta maestra se ve como Admin
+   
     if (userArea === 'ADMIN') return 'Administrador';
     
-    // Para Gleidys, Fabiola, Miguel y cualquier otro:
+    
     return 'Usuario Municipal';
   };
 

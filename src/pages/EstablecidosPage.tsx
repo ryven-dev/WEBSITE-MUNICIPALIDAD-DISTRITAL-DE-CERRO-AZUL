@@ -6,7 +6,7 @@ import {
   RiAddLine, RiPencilLine, RiDeleteBinLine, RiSearchLine, RiFileExcel2Line, 
   RiStore2Line, RiArrowLeftSLine, RiArrowRightSLine,
   RiUploadCloud2Line, RiFileTextLine, RiCloseCircleLine, RiLoader4Line,
-  RiLockLine, RiEyeLine // <--- Usamos RiEyeLine (Ojo)
+  RiLockLine, RiEyeLine 
 } from 'react-icons/ri';
 import * as XLSX from 'xlsx';
 import toast from 'react-hot-toast';
@@ -290,8 +290,7 @@ const EstablecidosPage = () => {
 
                             <td className={`${fixedCellStyle}`}>
                                 <div className="flex justify-center gap-1.5">
-                                    
-                                    {/* --- BOTÓN VER/IMPRIMIR LICENCIA (OJO) --- */}
+                                                                       
                                     <button 
                                         onClick={() => handleOpenLicenciaPreview(item)} 
                                         className="text-green-400 hover:text-green-300" 
@@ -299,8 +298,6 @@ const EstablecidosPage = () => {
                                     >
                                         <RiEyeLine size={16} /> 
                                     </button>
-
-                                    {/* --- ELIMINADO EL BOTÓN DE QR QUE ESTABA AQUÍ --- */}
 
                                     <button onClick={() => handleEdit(item)} className={`${canEdit ? 'text-blue-400 hover:text-blue-300' : 'text-gray-600 cursor-not-allowed opacity-50'}`} title="Editar">{canEdit ? <RiPencilLine size={14} /> : <RiLockLine size={14} />}</button>
                                     <button onClick={() => handleDelete(item.id, item.usuario_registro)} className={`${canEdit ? 'text-red-500 hover:text-red-400' : 'text-gray-600 cursor-not-allowed opacity-50'}`} title="Eliminar">{canEdit ? <RiDeleteBinLine size={14} /> : <RiLockLine size={14} />}</button>

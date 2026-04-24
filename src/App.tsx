@@ -1,6 +1,8 @@
 // src/App.tsx
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import InventarioInformaticaPage from './pages/Informatica/InventarioInformaticaPage';
+import ITAnalyticsDashboard from './pages/Informatica/ITAnalyticsDashboard';
 
 // 1. IMPORTAR EL HOOK
 import { useAuth } from './context/AuthContext';
@@ -19,8 +21,8 @@ import ProtectedRoute from './components/ProtectedRoute';
 import DashboardLayout from './components/DashboardLayout';
 import AlumnosVacacionesPage from './pages/Social/AlumnosVacacionesPage';
 import EntregaPolosPage from './pages/Social/EntregaPolosPage';
-import BibliotecaPage from './pages/Social/BibliotecaPage'; // Importar
-import BusEscolarPage from './pages/Social/BusEscolarPage'; // Importar
+import BibliotecaPage from './pages/Social/BibliotecaPage';
+import BusEscolarPage from './pages/Social/BusEscolarPage';
 
 // Componente para redirigir según el área
 const HomeRedirect = () => {
@@ -38,13 +40,12 @@ const HomeRedirect = () => {
     );
   }
 
-  // 2. Si no hay sesión, mandarlo al login (Seguridad extra)
+  // 2. Si no hay sesión, mandarlo al login
   if (!session) {
     return <Navigate to="/login" replace />;
   }
 
-  // 3. (CORRECCIÓN) Si hay sesión pero el área aún no llega, esperamos un poco más
-  // Esto evita que te mande al default por error.
+  // 3. Si hay sesión pero el área aún no carga
   if (!userArea) {
      return (
       <div className="min-h-screen bg-[#13141a] flex items-center justify-center">
@@ -52,13 +53,20 @@ const HomeRedirect = () => {
       </div>
     );
   }
+
+  // Definimos area como string para la comparación
+  const area = userArea as string;
   
   // 4. Redirecciones Específicas
-  if (userArea === 'DESARROLLO_SOCIAL') {
+  if (area === 'INFORMATICA') {
+    return <Navigate to="/informatica/dashboard" replace />;
+  }
+  
+  if (area === 'DESARROLLO_SOCIAL') {
     return <Navigate to="/panel-social" replace />;
   }
 
-  if (userArea === 'FISCALIZACION') {
+  if (area === 'FISCALIZACION') {
     return <Navigate to="/fiscalizacion" replace />;
   }
   
@@ -95,6 +103,9 @@ function App() {
             <Route path="/panel-comercializacion" element={<Dashboard />} />
             <Route path="/panel-social" element={<DashboardSocial />} />
             
+            {/* NUEVA RUTA: INVENTARIO INFORMATICA */}
+            <Route path="/informatica/inventario" element={<InventarioInformaticaPage />} />
+
             {/* Comercialización (Con Año) */}
             <Route path="/comercios/:anio" element={<ComerciosPage />} />
             <Route path="/comercios-establecidos/:anio" element={<EstablecidosPage />} />
@@ -111,6 +122,7 @@ function App() {
             <Route path="/social/entrega-polos" element={<EntregaPolosPage />} />
             <Route path="/social/biblioteca" element={<BibliotecaPage />} />
             <Route path="/social/bus-escolar" element={<BusEscolarPage />} />
+            <Route path="/informatica/dashboard" element={<ITAnalyticsDashboard />} />
 
           </Route>
         </Route>

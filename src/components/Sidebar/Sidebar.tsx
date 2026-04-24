@@ -8,7 +8,8 @@ import {
   RiCalendarEventLine,
   RiHeartPulseLine, RiWheelchairLine, RiGobletLine, 
   RiBookOpenLine, RiParentLine, 
-  RiBasketballLine, RiShirtLine, RiBusLine // <--- Agregado RiBusLine
+  RiBasketballLine, RiShirtLine, RiBusLine,
+  RiComputerLine, RiPieChartLine // <--- Agregados para Informática
 } from 'react-icons/ri';
 import { useAuth } from '../../context/AuthContext';
 
@@ -25,6 +26,7 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
   const [showAmbulatoriosYears, setShowAmbulatoriosYears] = useState(false);
   const [showEstablecidosYears, setShowEstablecidosYears] = useState(false);
   const [showVacaciones, setShowVacaciones] = useState(false);
+  
 
   useEffect(() => {
     const path = location.pathname;
@@ -44,11 +46,14 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
   const subLinkStyles = ({ isActive }: { isActive: boolean }) => 
     `flex items-center gap-3 py-2 pl-12 pr-4 text-sm rounded-lg transition-colors ${isActive ? 'text-blue-400 font-bold bg-blue-500/10' : 'text-gray-500 hover:text-gray-300'}`;
 
-  const isSuperUser = userArea === 'ADMIN' || userArea === 'GERENCIA';
+  // --- LÓGICA DE PERMISOS ---
+ const isSuperUser = userArea === 'ADMIN' || userArea === 'GERENCIA';
   const showComercial = isSuperUser || userArea === 'COMERCIALIZACION';
   const showFiscalizacion = isSuperUser || userArea === 'FISCALIZACION';
   const showSocial = isSuperUser || userArea === 'DESARROLLO_SOCIAL';
-
+  
+  
+  const showInformatica = isSuperUser || (userArea as string) === 'INFORMATICA';
   return (
     <>
       <div className={`fixed inset-0 bg-black/50 z-40 lg:hidden transition-opacity duration-300 ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`} onClick={onClose} />
@@ -82,9 +87,29 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
             <nav className="pb-32">
                 <ul className="flex flex-col gap-1">
                     
-                    {(showComercial || showFiscalizacion) && <li className="px-4 text-[10px] uppercase text-gray-600 font-bold tracking-wider mb-2 mt-2">D.E.T.P.E.</li>}
+                    {/* SECCIÓN ADMINISTRACIÓN / GERENCIA */}
+                    {(showComercial || showFiscalizacion || showInformatica) && <li className="px-4 text-[10px] uppercase text-gray-600 font-bold tracking-wider mb-2 mt-2">Áreas Administrativas</li>}
 
                     {isSuperUser && (<li><NavLink to="/gerencia" className={getNavLinkStyles} onClick={onClose}><RiBriefcase4Line size={20} /><span>Gerencia General</span></NavLink></li>)}
+
+                    {/* SECCIÓN INFORMÁTICA (NUEVO) */}
+                    {showInformatica && (
+                        <>
+                            <li className="px-4 text-[10px] uppercase text-gray-600 font-bold tracking-wider mb-2 mt-4">Tecnologías de Información</li>
+                            <li>
+                                <NavLink to="/informatica/dashboard" className={getNavLinkStyles} onClick={onClose}>
+                                    <RiPieChartLine size={20} />
+                                    <span>Dashboard IT</span>
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/informatica/inventario" className={getNavLinkStyles} onClick={onClose}>
+                                    <RiComputerLine size={20} />
+                                    <span>Inventario IT</span>
+                                </NavLink>
+                            </li>
+                        </>
+                    )}
 
                     {showComercial && (
                         <li>
@@ -130,10 +155,7 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                         <>
                             <li className="px-4 text-[10px] uppercase text-gray-600 font-bold tracking-wider mb-2 mt-6">Desarrollo Social</li>
                             <li><NavLink to="/panel-social" className={getNavLinkStyles} onClick={onClose} end><RiDashboardLine size={20}/><span>Panel General</span></NavLink></li>
-                            
-                            {/* NUEVO: Bus Municipal (Primero después de Panel General) */}
                             <li><NavLink to="/social/bus-escolar" className={getNavLinkStyles} onClick={onClose}><RiBusLine size={20}/><span>Bus Municipal</span></NavLink></li>
-                            
                             <li><NavLink to="/social/ciam" className={getNavLinkStyles} onClick={onClose}><RiHeartPulseLine size={20}/><span>CIAM</span></NavLink></li>
                             <li><NavLink to="/social/omaped" className={getNavLinkStyles} onClick={onClose}><RiWheelchairLine size={20}/><span>OMAPED</span></NavLink></li>
                             <li><NavLink to="/social/vaso-leche" className={getNavLinkStyles} onClick={onClose}><RiGobletLine size={20}/><span>Vaso de Leche</span></NavLink></li>
@@ -144,7 +166,7 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                                     <div className="flex items-center gap-3"><RiBasketballLine size={20} className={showVacaciones ? "text-orange-400" : ""} /><span className="truncate">Diviértete y Aprende</span></div>
                                     {showVacaciones ? <RiArrowDownSLine /> : <RiArrowRightSLine />}
                                 </div>
-                                <div className={`overflow-hidden transition-all duration-300 ${showVacaciones ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                                <div className={`overflow-hidden transition-all duration-300 ${showVacaciones ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'}`}>
                                     <ul className="flex flex-col gap-1 mt-1 border-l border-gray-700 ml-14">
                                         <li><NavLink to="/social/vacaciones-utiles" className={({ isActive }) => `flex items-center gap-2 py-2 pl-4 text-xs transition-colors ${isActive ? 'text-orange-400 font-bold' : 'text-gray-500 hover:text-white'}`} onClick={onClose}><RiUserVoiceLine size={12} /> Alumnos</NavLink></li>
                                         <li><NavLink to="/social/entrega-polos" className={({ isActive }) => `flex items-center gap-2 py-2 pl-4 text-xs transition-colors ${isActive ? 'text-green-400 font-bold' : 'text-gray-500 hover:text-white'}`} onClick={onClose}><RiShirtLine size={12} /> Entrega de Polos</NavLink></li>
@@ -169,7 +191,7 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                         <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
                         <span className="text-xs text-green-400 font-medium">Operativo</span>
                     </div>
-                    <span className="text-[9px] text-white bg-gray-700 px-2 py-0.5 rounded truncate max-w-[100px]">{userArea || '...'}</span>
+                    <span className="text-[9px] text-white bg-gray-700 px-2 py-0.5 rounded truncate max-w-[100px] font-bold uppercase">{userArea || '...'}</span>
                 </div>
             </div>
         </div>

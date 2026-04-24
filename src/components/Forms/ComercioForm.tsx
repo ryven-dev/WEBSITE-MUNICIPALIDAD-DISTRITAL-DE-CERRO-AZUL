@@ -11,7 +11,7 @@ interface ComercioFormProps {
   onClose: () => void;
   onFormSubmit: () => void;
   comercioData?: Comercio | null;
-  currentYearContext: string; // <--- NUEVA PROP: Recibe el año (2025, 2026)
+  currentYearContext: string; 
 }
 
 const initialState = {
@@ -34,7 +34,7 @@ const ComercioForm = ({ isOpen, onClose, onFormSubmit, comercioData, currentYear
   const { session } = useAuth();
   const [formData, setFormData] = useState(initialState);
   
-  // Estado para el número temporal (ej: el "123" de "123-2026")
+  
   const [tempAuthNumber, setTempAuthNumber] = useState(''); 
 
   const [loading, setLoading] = useState(false);
@@ -44,7 +44,7 @@ const ComercioForm = ({ isOpen, onClose, onFormSubmit, comercioData, currentYear
 
   useEffect(() => {
     if (isEditMode && isOpen && comercioData) {
-      // MODO EDICIÓN: Cargamos datos existentes
+      
       setFormData({
         ...initialState,
         ...comercioData,
@@ -54,7 +54,7 @@ const ComercioForm = ({ isOpen, onClose, onFormSubmit, comercioData, currentYear
         numero_autorizacion: comercioData.numero_autorizacion || '',
       });
 
-      // Extraer el número temporal si existe (ej: "045" de "045-2025")
+      
       if (comercioData.numero_autorizacion_temporal) {
         const parts = comercioData.numero_autorizacion_temporal.split('-');
         if (parts.length >= 1) {
@@ -62,7 +62,7 @@ const ComercioForm = ({ isOpen, onClose, onFormSubmit, comercioData, currentYear
         }
       }
     } else {
-      // MODO CREACIÓN: Limpiamos
+      
       setFormData(initialState);
       setTempAuthNumber('');
     }
@@ -92,7 +92,7 @@ const ComercioForm = ({ isOpen, onClose, onFormSubmit, comercioData, currentYear
         numero_autorizacion_temporal: authTemporalFinal,
         fecha_expedicion: formData.fecha_expedicion === '' ? null : formData.fecha_expedicion,
         fecha_caducidad: formData.fecha_caducidad === '' ? null : formData.fecha_caducidad,
-        anio: currentYearContext // <--- GUARDAMOS EL AÑO EN QUE ESTAMOS
+        anio: currentYearContext 
     };
 
     try {
@@ -121,7 +121,7 @@ const ComercioForm = ({ isOpen, onClose, onFormSubmit, comercioData, currentYear
 
           let nextNum = 1;
           if (lastRecord && lastRecord.numero_autorizacion) {
-             // Si el último fue "005", el siguiente es 6
+             
              const currentNum = parseInt(lastRecord.numero_autorizacion, 10);
              if (!isNaN(currentNum)) nextNum = currentNum + 1;
           }
@@ -175,7 +175,6 @@ const ComercioForm = ({ isOpen, onClose, onFormSubmit, comercioData, currentYear
                     placeholder="000" 
                 />
                 
-                {/* --- AQUI ESTA EL CAMBIO: AÑO FIJO --- */}
                 <div className="w-1/3 h-full flex items-center justify-center bg-gray-800 border border-l-0 border-gray-600 rounded-r-lg px-2">
                     <span className="text-gray-400 font-bold select-none">- {currentYearContext}</span>
                 </div>
@@ -208,7 +207,7 @@ const ComercioForm = ({ isOpen, onClose, onFormSubmit, comercioData, currentYear
 
           {/* Columna Derecha */}
           <div>
-            {/* ... resto de campos (Giro, Ubicación, etc) igual que antes ... */}
+            
             <label className="block text-sm font-medium text-gray-400">Giro</label>
             <input type="text" name="giro" value={formData.giro} onChange={handleChange} className="w-full mt-1 bg-[#27282F] rounded-lg p-2 border border-gray-600 focus:ring-red-500 mb-4" required />
 

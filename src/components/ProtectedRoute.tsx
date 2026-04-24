@@ -13,7 +13,7 @@ const ProtectedRoute = () => {
     return <Navigate to="/login" replace />;
   }
 
-  return <Outlet />; // Renderiza el contenido de la ruta protegida (ej: el Dashboard)
+  return <Outlet />; 
 };
 
 export default ProtectedRoute;

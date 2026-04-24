@@ -1,7 +1,7 @@
-// src/supabaseClient.ts
+
 import { createClient } from '@supabase/supabase-js'
 
-// Asegúrate de que tus variables en .env se llamen así:
+
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 
