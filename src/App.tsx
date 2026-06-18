@@ -15,6 +15,12 @@ import EstablecidosPage from './pages/EstablecidosPage';
 import GerenciaPage from './pages/GerenciaPage';
 import FiscalizacionPage from './pages/FiscalizacionPage'; 
 import DashboardSocial from './components/DashboardSocial'; 
+import BaseDashboardPage from './pages/Social/Biblioteca/BaseDashboardPage';
+import BaseSolicitudesPage from './pages/Social/Biblioteca/BaseSolicitudesPage';
+import BasePrestamosPage from './pages/Social/Biblioteca/BasePrestamosPage';
+import BaseIncidenciasPage from './pages/Social/Biblioteca/BaseIncidenciasPage';
+import BaseRenovacionesPage from './pages/Social/Biblioteca/BaseRenovacionesPage';
+import BaseReportesPage from './pages/Social/Biblioteca/BaseReportesPage';
 
 // Layout y Protección
 import ProtectedRoute from './components/ProtectedRoute';
@@ -120,7 +126,13 @@ function App() {
             <Route path="/social/:programa" element={<GerenciaPage />} />
             <Route path="/social/vacaciones-utiles" element={<AlumnosVacacionesPage />} />
             <Route path="/social/entrega-polos" element={<EntregaPolosPage />} />
-            <Route path="/social/biblioteca" element={<BibliotecaPage />} />
+            <Route path="/social/biblioteca" element={<BaseDashboardPage />} />
+            <Route path="/social/biblioteca/inventario" element={<BibliotecaPage />} />
+            <Route path="/social/biblioteca/solicitudes" element={<BaseSolicitudesPage />} />
+            <Route path="/social/biblioteca/prestamos" element={<BasePrestamosPage />} />
+            <Route path="/social/biblioteca/incidencias" element={<BaseIncidenciasPage />} />
+            <Route path="/social/biblioteca/renovaciones" element={<BaseRenovacionesPage />} />
+            <Route path="/social/biblioteca/reportes" element={<BaseReportesPage />} />
             <Route path="/social/bus-escolar" element={<BusEscolarPage />} />
             <Route path="/informatica/dashboard" element={<ITAnalyticsDashboard />} />
 
